@@ -1,0 +1,39 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true # 실시간 리로딩 기능 활성화 (프로젝트 빌드가 완료되면 애플리케이션을 스스로 재시작시켜줌.)
+  thymeleaf:
+    cache: false # 타임리프 템플릿 및 정적 리소스 캐시 활성화 | 만약 수정한 정적 리소스들을 브라우저에서 반영받고 싶다면 브라우저를 강제 새로고침 하거나 캐시를 비우면 된다.
+  # @Profile 어노테이션을 통해 스프링 부트 애플리케이션의 런타임 환경을 관리할 수 있다.
+  profiles:
+    active: prod # 프로파일 식별자
+
+  output:
+    ansi:
+      enabled: ALWAYS # Console에 출력되는 로깅 메세지를 색으로 구분해서 출력한다.
+
+logging:
+  #path: logs # 로그 내용이 저장되는 로그 디렉토리 위치
+  level:
+    com.johnny.study: DEBUG # logging.level.{패키지 경로}를 통해 로깅 레벨을 결정할 수 있다.
+
+# com.tutorial.testautoconfigure property
+holo:
+  #name: # @NotNull 테스트 용 빈 값 설정 - HolomanProperties 클래스 확인
+  name: johnny_2
+  how-long: ${random.int(10,100)} # Spring 변수
+  full-name: ${holo.name} Uhm # 플레이스 홀더 형태
+  sessionTimeout: 25
+
+# undertow embedded web server
+server:
+  port: 8080  # 내장 웹 서버 포트 설정
+  compression:
+    enabled: true # css, js, html등 압축 전송할 때 이득이 되는 포맷들을 자동 압축해서 전송시키는 옵션 = 데이터 사용량 감소 (Default: false)
+  #ssl: # SSL 설정 (HTTPS)
+    #key-store: testkeystore.p12
+    #key-store-type: PKCS12
+    #key-store-password: worldspon
+    #key-alias: localhost # spring = keystore.p12 | localhost = testkeystore.p12
+  #http2:
+    #enabled: true  # http2 옵션 설정 JDK 9 이상 에서만 옵션을 사용하길 권장 (Default: false) / 반드시 https 설정을 함께 해줘야 함
